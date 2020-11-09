@@ -1,3 +1,4 @@
+import 'package:exercise/main/factories/page/register/register_page_factory.dart';
 import 'package:exercise/main/routes.dart';
 import 'package:exercise/ui/components/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ void main() {
 }
 
 class App extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -20,6 +20,7 @@ class App extends StatelessWidget {
       initialRoute: Routes.HOME,
       getPages: [
         GetPage(name: Routes.HOME, page: makeHomePage),
+        GetPage(name: Routes.REGISTER, page: makeRegisterPage),
       ],
     );
   }

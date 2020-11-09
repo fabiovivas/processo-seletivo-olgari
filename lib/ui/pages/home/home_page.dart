@@ -1,5 +1,7 @@
+import 'package:exercise/main/routes.dart';
 import 'package:exercise/ui/pages/home/home_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -74,7 +76,9 @@ class HomePage extends StatelessWidget {
                   width: 300,
                   height: 50,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.REGISTER);
+                    },
                     child: Text(
                       'ENTRAR',
                       style: TextStyle(color: Colors.white),
