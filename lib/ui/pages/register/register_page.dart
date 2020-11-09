@@ -10,7 +10,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(left: 10),
