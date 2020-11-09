@@ -76,7 +76,9 @@ class RegisterPage extends StatelessWidget {
                   child: SizedBox(
                     height: 65,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                      },
                       child: Text(
                         'CANCELAR',
                         style: TextStyle(color: Colors.black),
