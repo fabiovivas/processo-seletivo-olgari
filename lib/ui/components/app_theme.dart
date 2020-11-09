@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData makeAppTheme() {
   return ThemeData(
-    backgroundColor: Color.fromARGB(229, 229, 229, 1)
+    textTheme: GoogleFonts.firaSansTextTheme()
   );
 }
