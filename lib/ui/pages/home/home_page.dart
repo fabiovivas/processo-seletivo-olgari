@@ -1,13 +1,11 @@
 import 'package:exercise/main/routes.dart';
-import 'package:exercise/ui/pages/home/home_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   String message;
 
-  final IHomePresenter homePresenter;
-  HomePage(this.homePresenter) {
+  HomePage() {
     if (Get.arguments != null) {
       message = Get.arguments;
     }

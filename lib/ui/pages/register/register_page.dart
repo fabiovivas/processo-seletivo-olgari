@@ -1,4 +1,4 @@
-import 'package:exercise/presentation/register.dart/register_presenter.dart';
+import 'package:exercise/presentation/register/register_presenter.dart';
 import 'package:exercise/ui/pages/register/components/bottom_options.dart';
 import 'package:exercise/ui/pages/register/components/register_password.dart';
 import 'package:flutter/material.dart';
