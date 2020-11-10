@@ -69,6 +69,21 @@ mixin _$RegisterPresenter on _RegisterPresenter, Store {
     });
   }
 
+  final _$progressAtom = Atom(name: '_RegisterPresenter.progress');
+
+  @override
+  double get progress {
+    _$progressAtom.reportRead();
+    return super.progress;
+  }
+
+  @override
+  set progress(double value) {
+    _$progressAtom.reportWrite(value, super.progress, () {
+      super.progress = value;
+    });
+  }
+
   final _$_RegisterPresenterActionController =
       ActionController(name: '_RegisterPresenter');
 
@@ -111,7 +126,8 @@ mixin _$RegisterPresenter on _RegisterPresenter, Store {
 email: ${email},
 emailError: ${emailError},
 isEmailValid: ${isEmailValid},
-password: ${password}
+password: ${password},
+progress: ${progress}
     ''';
   }
 }

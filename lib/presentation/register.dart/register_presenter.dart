@@ -20,6 +20,9 @@ abstract class _RegisterPresenter with Store {
   @observable
   String password;
 
+  @observable
+  double progress = 0.5;
+
   @action
   void setEmail(String email) {
     this.email = email;
@@ -29,7 +32,10 @@ abstract class _RegisterPresenter with Store {
   @action
   void validateEmail() {
     _validateEmail();
-    if (emailError == null) isEmailValid = true;
+    if (emailError == null) {
+      isEmailValid = true;
+      progress = 1;      
+    }
   }
 
   _validateEmail(){

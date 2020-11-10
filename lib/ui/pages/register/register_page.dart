@@ -2,6 +2,7 @@ import 'package:exercise/presentation/register.dart/register_presenter.dart';
 import 'package:exercise/ui/pages/register/components/bottom_options.dart';
 import 'package:exercise/ui/pages/register/components/register_password.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
@@ -69,13 +70,27 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       bottomNavigationBar: Transform.translate(
         offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
-        child: BottomAppBar(
-          child: BottomOptions(
-            firstLabel: 'CANCELAR',
-            firstButtom: FocusScope.of(context).unfocus,
-            lastLabel: 'PRÓXIMO',
-            lastButtom: widget.registerPresenter.validateEmail,
-          ),
+        child: Wrap(
+          children: [
+            Observer(
+              builder: (_) {
+                return LinearProgressIndicator(
+                  value: widget.registerPresenter.progress,
+                  backgroundColor: Colors.white,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Color.fromRGBO(249, 202, 7, 1)),
+                );
+              },
+            ),
+            BottomAppBar(
+              child: BottomOptions(
+                firstLabel: 'CANCELAR',
+                firstButtom: FocusScope.of(context).unfocus,
+                lastLabel: 'PRÓXIMO',
+                lastButtom: widget.registerPresenter.validateEmail,
+              ),
+            )
+          ],
         ),
       ),
     );
