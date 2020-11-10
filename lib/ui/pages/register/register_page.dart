@@ -1,4 +1,5 @@
 import 'package:exercise/presentation/register.dart/register_presenter.dart';
+import 'package:exercise/ui/pages/register/components/bottom_options.dart';
 import 'package:exercise/ui/pages/register/components/register_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,51 +69,11 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       bottomNavigationBar: Transform.translate(
         offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
-        child: BottomAppBar(
-          child: Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 65,
-                    child: RaisedButton(
-                      onPressed: FocusScope.of(context).unfocus,
-                      child: Text(
-                        'CANCELAR',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      color: Colors.white,
-                      elevation: 1,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 65,
-                    child: RaisedButton(
-                      onPressed: widget.registerPresenter.validateEmail,
-                      child: Text(
-                        'PRÓXIMO',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      color: Color.fromRGBO(249, 202, 7, 1),
-                      elevation: 1,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        child: BottomOptions(
+          firstLabel: 'CANCELAR',
+          firstButtom: FocusScope.of(context).unfocus,
+          lastLabel: 'PRÓXIMO',
+          lastButtom: widget.registerPresenter.validateEmail,
         ),
       ),
     );
