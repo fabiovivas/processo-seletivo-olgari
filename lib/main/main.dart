@@ -2,12 +2,17 @@ import 'package:exercise/main/factories/page/register/register_page_factory.dart
 import 'package:exercise/main/routes.dart';
 import 'package:exercise/ui/components/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'factories/page/home/home_page_factory.dart';
 
 void main() {
-  runApp(App());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(new App());
+  });
 }
 
 class App extends StatelessWidget {
