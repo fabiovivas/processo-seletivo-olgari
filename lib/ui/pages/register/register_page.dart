@@ -69,11 +69,13 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       bottomNavigationBar: Transform.translate(
         offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
-        child: BottomOptions(
-          firstLabel: 'CANCELAR',
-          firstButtom: FocusScope.of(context).unfocus,
-          lastLabel: 'PRÓXIMO',
-          lastButtom: widget.registerPresenter.validateEmail,
+        child: BottomAppBar(
+          child: BottomOptions(
+            firstLabel: 'CANCELAR',
+            firstButtom: FocusScope.of(context).unfocus,
+            lastLabel: 'PRÓXIMO',
+            lastButtom: widget.registerPresenter.validateEmail,
+          ),
         ),
       ),
     );

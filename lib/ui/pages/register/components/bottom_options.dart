@@ -17,51 +17,49 @@ class BottomOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 65,
-                child: RaisedButton(
-                  onPressed: firstButtom,
-                  child: Text(
-                    firstLabel,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  color: Colors.white,
-                  elevation: 1,
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 65,
+              child: RaisedButton(
+                onPressed: firstButtom,
+                child: Text(
+                  firstLabel,
+                  style: TextStyle(color: Colors.black),
                 ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: Colors.white,
+                elevation: 1,
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 65,
-                child: RaisedButton(
-                  onPressed: lastButtom,
-                  child: Text(
-                    lastLabel,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  color: Color.fromRGBO(249, 202, 7, 1),
-                  elevation: 1,
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 65,
+              child: RaisedButton(
+                onPressed: lastButtom,
+                child: Text(
+                  lastLabel,
+                  style: TextStyle(color: Colors.white),
                 ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: Color.fromRGBO(249, 202, 7, 1),
+                elevation: 1,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
