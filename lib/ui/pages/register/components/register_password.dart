@@ -1,3 +1,4 @@
+import 'package:exercise/main/routes.dart';
 import 'package:exercise/presentation/register.dart/register_presenter.dart';
 import 'package:exercise/ui/pages/register/components/bottom_options.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +138,9 @@ class RegisterPassword extends StatelessWidget {
                                 Get.back();
                               },
                               lastLabel: 'ENVIAR',
-                              lastButtom: () {},
+                              lastButtom: () {
+                                Get.offAllNamed(Routes.HOME, arguments: 'Te enviamos um e-mail ;)');
+                              },
                             ),
                           ],
                         ),

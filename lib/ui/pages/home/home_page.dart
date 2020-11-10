@@ -2,11 +2,54 @@ import 'package:exercise/main/routes.dart';
 import 'package:exercise/ui/pages/home/home_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  String message;
+
   final IHomePresenter homePresenter;
-  HomePage(this.homePresenter);
+  HomePage(this.homePresenter) {
+    if (Get.arguments != null) {
+      message = Get.arguments;
+    }
+  }
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    if (widget.message != null) {
+      var warning = Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(0, 165, 106, 1),
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        child: ListTile(
+          leading: Icon(
+            Icons.check_circle_outline,
+            color: Colors.white,
+          ),
+          title: Text(
+            widget.message,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+      Future.delayed(Duration(seconds: 0), () {
+        Get.snackbar(
+          null,
+          null,
+          messageText: warning,
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.transparent,
+        );
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
