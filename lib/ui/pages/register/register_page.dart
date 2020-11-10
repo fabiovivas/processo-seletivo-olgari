@@ -24,6 +24,23 @@ class _RegisterPageState extends State<RegisterPage> {
     final screenSize = MediaQuery.of(context).size;
     ScrollController _controller = ScrollController();
 
+    BottomOptions optionsEmail = BottomOptions(
+      firstLabel: 'CANCELAR',
+      firstButtom: FocusScope.of(context).unfocus,
+      lastLabel: 'PRÓXIMO',
+      lastButtom: widget.registerPresenter.validateEmail,
+    );
+
+    BottomOptions optionsPassword = BottomOptions(
+      firstLabel: 'ANTERIOR',
+      firstButtom: () {
+        widget.registerPresenter.setProgress(0.5);
+        _controller.jumpTo(-screenSize.width);
+      },
+      lastLabel: 'ENVIAR',
+      lastButtom: () {},
+    );
+
     disposer =
         reaction((_) => widget.registerPresenter.isEmailValid, (isEmailValid) {
       if (isEmailValid) _controller.jumpTo(screenSize.width);
@@ -83,11 +100,14 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             BottomAppBar(
-              child: BottomOptions(
-                firstLabel: 'CANCELAR',
-                firstButtom: FocusScope.of(context).unfocus,
-                lastLabel: 'PRÓXIMO',
-                lastButtom: widget.registerPresenter.validateEmail,
+              child: Observer(
+                builder: (_) {
+                  if (widget.registerPresenter?.isEmailValid == true) {
+                    return optionsPassword;
+                  } else {
+                    return optionsEmail;
+                  }
+                },
               ),
             )
           ],

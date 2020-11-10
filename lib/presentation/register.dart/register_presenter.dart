@@ -34,14 +34,20 @@ abstract class _RegisterPresenter with Store {
     _validateEmail();
     if (emailError == null) {
       isEmailValid = true;
-      progress = 1;      
+      setProgress(1);
     }
   }
 
-  _validateEmail(){
+  _validateEmail() {
     emailError = emailValidation.validateEmail(email);
   }
 
   @action
   void setPassword(String password) => this.password = password;
+
+  @action
+  setProgress(double progress) {
+    this.progress = progress;
+    if (isEmailValid == true && progress == 0.5) isEmailValid = false;
+  }
 }

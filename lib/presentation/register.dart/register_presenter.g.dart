@@ -121,6 +121,17 @@ mixin _$RegisterPresenter on _RegisterPresenter, Store {
   }
 
   @override
+  dynamic setProgress(double progress) {
+    final _$actionInfo = _$_RegisterPresenterActionController.startAction(
+        name: '_RegisterPresenter.setProgress');
+    try {
+      return super.setProgress(progress);
+    } finally {
+      _$_RegisterPresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
