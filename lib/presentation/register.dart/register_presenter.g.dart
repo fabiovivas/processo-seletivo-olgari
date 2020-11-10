@@ -39,6 +39,36 @@ mixin _$RegisterPresenter on _RegisterPresenter, Store {
     });
   }
 
+  final _$isEmailValidAtom = Atom(name: '_RegisterPresenter.isEmailValid');
+
+  @override
+  bool get isEmailValid {
+    _$isEmailValidAtom.reportRead();
+    return super.isEmailValid;
+  }
+
+  @override
+  set isEmailValid(bool value) {
+    _$isEmailValidAtom.reportWrite(value, super.isEmailValid, () {
+      super.isEmailValid = value;
+    });
+  }
+
+  final _$passwordAtom = Atom(name: '_RegisterPresenter.password');
+
+  @override
+  String get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
   final _$_RegisterPresenterActionController =
       ActionController(name: '_RegisterPresenter');
 
@@ -65,10 +95,23 @@ mixin _$RegisterPresenter on _RegisterPresenter, Store {
   }
 
   @override
+  void setPassword(String password) {
+    final _$actionInfo = _$_RegisterPresenterActionController.startAction(
+        name: '_RegisterPresenter.setPassword');
+    try {
+      return super.setPassword(password);
+    } finally {
+      _$_RegisterPresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
-emailError: ${emailError}
+emailError: ${emailError},
+isEmailValid: ${isEmailValid},
+password: ${password}
     ''';
   }
 }

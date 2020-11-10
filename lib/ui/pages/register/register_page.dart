@@ -1,14 +1,32 @@
 import 'package:exercise/presentation/register.dart/register_presenter.dart';
+import 'package:exercise/ui/pages/register/components/register_password.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
-class RegisterPage extends StatelessWidget {
+import 'components/register_email.dart';
+
+class RegisterPage extends StatefulWidget {
   final RegisterPresenter registerPresenter;
   RegisterPage(this.registerPresenter);
 
   @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  ReactionDisposer disposer;
+
+  @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    ScrollController _controller = ScrollController();
+
+    disposer =
+        reaction((_) => widget.registerPresenter.isEmailValid, (isEmailValid) {
+      if (isEmailValid) _controller.jumpTo(screenSize.width);
+    });
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -25,60 +43,26 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
           )),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 37, 10, 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _controller,
+          scrollDirection: Axis.horizontal,
           children: [
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-                children: <TextSpan>[
-                  TextSpan(text: 'Para começar '),
-                ],
+            Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              child: RegisterEmail(
+                registerPresenter: widget.registerPresenter,
               ),
             ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'qual o seu ',
-                  ),
-                  TextSpan(
-                    text: 'e-mail?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+            Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              child: RegisterPassword(
+                registerPresenter: widget.registerPresenter,
               ),
             ),
-            Observer(builder: (_) {
-              return TextField(
-                decoration: InputDecoration(
-                    hintText: 'Digite aqui',
-                    errorText: registerPresenter.emailError == null
-                        ? null
-                        : registerPresenter.emailError,
-                    suffixIcon: registerPresenter.emailError == null
-                        ? null
-                        : Icon(
-                            Icons.error,
-                            color: Color.fromRGBO(255, 95, 0, 1),
-                          )),
-                keyboardType: TextInputType.emailAddress,
-                onChanged: registerPresenter.setEmail,
-              );
-            })
           ],
         ),
       ),
@@ -93,9 +77,7 @@ class RegisterPage extends StatelessWidget {
                   child: SizedBox(
                     height: 65,
                     child: RaisedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                      },
+                      onPressed: FocusScope.of(context).unfocus,
                       child: Text(
                         'CANCELAR',
                         style: TextStyle(color: Colors.black),
@@ -115,7 +97,7 @@ class RegisterPage extends StatelessWidget {
                   child: SizedBox(
                     height: 65,
                     child: RaisedButton(
-                      onPressed: registerPresenter.validateEmail,
+                      onPressed: widget.registerPresenter.validateEmail,
                       child: Text(
                         'PRÓXIMO',
                         style: TextStyle(color: Colors.white),
@@ -134,5 +116,11 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    disposer();
+    super.dispose();
   }
 }
