@@ -1,9 +1,10 @@
-import 'package:exercise/ui/pages/register/register_presenter.dart';
+import 'package:exercise/presentation/register.dart/register_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatelessWidget {
-  final IRegisterPresenter registerPresenter;
+  final RegisterPresenter registerPresenter;
   RegisterPage(this.registerPresenter);
 
   @override
@@ -61,7 +62,23 @@ class RegisterPage extends StatelessWidget {
                 ],
               ),
             ),
-            TextField(decoration: InputDecoration(hintText: 'Digite aqui'))
+            Observer(builder: (_) {
+              return TextField(
+                decoration: InputDecoration(
+                    hintText: 'Digite aqui',
+                    errorText: registerPresenter.emailError == null
+                        ? null
+                        : registerPresenter.emailError,
+                    suffixIcon: registerPresenter.emailError == null
+                        ? null
+                        : Icon(
+                            Icons.error,
+                            color: Color.fromRGBO(255, 95, 0, 1),
+                          )),
+                keyboardType: TextInputType.emailAddress,
+                onChanged: registerPresenter.setEmail,
+              );
+            })
           ],
         ),
       ),
@@ -98,7 +115,7 @@ class RegisterPage extends StatelessWidget {
                   child: SizedBox(
                     height: 65,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: registerPresenter.validateEmail,
                       child: Text(
                         'PRÓXIMO',
                         style: TextStyle(color: Colors.white),
